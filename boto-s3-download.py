@@ -17,8 +17,8 @@ def main(argv):
          bucketName = arg
       elif opt in ("-k", "--ObjectKey"):
          objectKey = arg
-   print 'S3 Bucket Name is "', bucketName
-   print 'S3 Object Key  is "',objectKey
+   print 'S3 Bucket Name is : ', bucketName
+   print 'S3 Object Key  is : ',objectKey
    download(bucketName,objectKey)
 
 def download(bucketName,s3ObjectKey):
