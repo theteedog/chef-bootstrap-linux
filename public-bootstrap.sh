@@ -1,19 +1,23 @@
 #!/bin/sh
-#Passing the first agumnet i.e $1 as the s3 path format 's3://{bucketname}/{object-key}'. e.g.  
+#Passing the first agumnet i.e $1 as the s3 bucket name.
+#Passing the first agumnet i.e $2 as the s3 object Key.
 
-#Download S3cmd and extract
-curl -L http://github.com/s3tools/s3cmd/archive/v1.5.0-alpha3.zip -o /tmp/s3cmd.zip
-unzip /tmp/s3cmd.zip -d /tmp/
-#rm /tmp/s3cmd.zip -f
+#Download Boto and extract
+curl -L https://github.com/boto/boto/archive/2.10.0.zip -o /tmp/boto.zip
+unzip /tmp/boto.zip -d /tmp/
+
+#Download Custom boto script
+
+#Install Boto
+cd /tmp/boto-2.10.0/
+python setup.py install
 
 #Download Private Bootstrap package.
-/tmp/s3cmd-1.5.0-alpha3/s3cmd get $1 /tmp/bootstrap.zip
-unzip /tmp/bootstrap.zip -d /tmp/private-bootstrap/
-#rm /tmp/bootstrap.zip -f
+curl -L https://raw.github.com/theteedog/chef-bootstrap-linux/master/boto-s3-download.py -o /tmp/boto-s3-download.py
+python /tmp/boto-s3-download.py -b '$1' -k '$2'
+unzip /tmp/private-bootstrap.zip -d /tmp/private-bootstrap/
 
 #Execute the private Linux Bootstrap
+chmod +x /tmp/private-bootstrap/scripts/linux-bootstrap.sh
 /tmp/private-bootstrap/scripts/linux-bootstrap.sh
 
-#Tidy up & Remove files '/tmp/s3cmd-1.5.0-alpha3/' & '/tmp/private-bootstrap/'
-#rm -rf /tmp/private-bootstrap/
-#rm -rf /tmp/s3cmd-1.5.0-alpha3/
