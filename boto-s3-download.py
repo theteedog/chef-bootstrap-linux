@@ -27,7 +27,7 @@ def download(bucketName,s3ObjectKey)
   from boto.s3.key import Key
   
   k = Key(b)
-  k.key = 's3ObjectKey'
+  k.key = s3ObjectKey
   k.get_contents_to_filename('/tmp/')
 
 if __name__ == "__main__":
