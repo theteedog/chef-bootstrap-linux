@@ -14,7 +14,10 @@ python setup.py install
 #Download Private Bootstrap package and extract it from the zip archive.
 curl -L https://raw.github.com/theteedog/chef-bootstrap-linux/master/boto-s3-download.py -o /tmp/boto-s3-download.py
 python /tmp/boto-s3-download.py -b "$1" -k "$2"
-tar -zxf /tmp/private-bootstrap.zip -d /tmp/private-bootstrap/
+
+#TODO: Check the disto to ensure the correct package format is used for the distro executing this script.
+apt-get install unzip
+unzip /tmp/private-bootstrap.zip -d /tmp/private-bootstrap/
 
 #Execute the private Linux Bootstrap
 chmod +x /tmp/private-bootstrap/scripts/linux-bootstrap.sh
