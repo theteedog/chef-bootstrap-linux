@@ -3,10 +3,9 @@
 #Passing the first agumnet i.e $2 as the s3 object Key.
 
 #Download Boto and extract
-curl -L https://github.com/boto/boto/archive/2.10.0.zip -o /tmp/boto.zip
-unzip /tmp/boto.zip -d /tmp/
-
-#Download Custom boto script
+curl -L https://github.com/boto/boto/archive/2.10.0.tar.gz -o /tmp/boto.tar.gz
+cd /tmp/
+tar -zxf boto.tar.gz
 
 #Install Boto
 cd /tmp/boto-2.10.0/
